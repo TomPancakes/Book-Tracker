@@ -1,24 +1,16 @@
-#BOOK TRACKER APP W/ DATABASE INTEGRATION
+#MAIN FILE. 
+
+import database #runs database code and sets up
+import customtkinter as ctk
+
+ctk.set_appearance_mode("System")
+
+app = ctk.CTk()
+app.title("Book Tracker")
+app.geometry("1600x1200")
+
+def add_book():
+    pass
 
 
-#Import libraries
-import sqlalchemy as sa
-
-
-#Set up Database
-engine = sa.create_engine("sqlite:///books.db")
-connection = engine.connect()
-
-metadata = sa.MetaData()
-
-books_table = sa.Table(
-    "books",
-    metadata,
-    #columns go here
-    sa.Column('id', sa.Integer, primary_key=True, autoincrement=True), #PrimaryKey is UNIQUE identifier. 
-    sa.Column('title', sa.String), #Frieren
-    sa.Column('score', sa.Integer), #86
-    sa.Column('status', sa.String), #READING, PAUSED, DROPPED, COMPLETED
-
-)
-
+app.mainloop() #always at end
