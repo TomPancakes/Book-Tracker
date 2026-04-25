@@ -7,21 +7,34 @@ con = sqlite3.connect("books.db") #Create new SQLite Database to save locally
 
 cur = con.cursor() #Database cursor allows to execute queries
 
-cur.execute("CREATE TABLE IF NOT EXISTS books(id, title, rating, status)")
+cur.execute("CREATE TABLE IF NOT EXISTS books(title, status)")
 
 
+def insert(entry, status):
 
-def insert_entry(entry, score, status):
-    pass
+    query = """
+    INSERT INTO books (title, status)
+    VALUES (:title, :status);
 
-def delete_entry(id):
-    pass
+    """
+    cur.execute(query, {"title": entry, "status": status})
+    con.commit() #actually commit to database
+
+
+def delete(name):
+    query = """
+    DELETE FROM books WHERE title = :title
+    """
+    cur.execute(query, {"title": name})
+    con.commit() #actually commit to database
 
 def modify_entry(id, title, score, status):
     pass
 
 def get_entries():
-    pass
+    cur.execute("SELECT title, status FROM books")
+    return cur.fetchall()
 
 
-con.close()
+#If you want to access the database in terminal: 
+# sqlite3 books.db
