@@ -11,7 +11,6 @@ cur.execute("CREATE TABLE IF NOT EXISTS books(title, status)")
 
 
 def insert(entry, status):
-
     query = """
     INSERT INTO books (title, status)
     VALUES (:title, :status);

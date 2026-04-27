@@ -13,13 +13,11 @@ root.title("Book Tracker")
 #Functions
 
 def update_table():
-    pass
-    #get the data from sql (for loop throughout)
 
     for row in table.get_children(): #Remove current table entries
         table.delete(row)
 
-    books = database.get_entries()
+    books = database.get_entries() #get data, place in books 
 
     for book in books: #iterate over list of entries
         table.insert("", "end", values=book) #insert 
@@ -74,10 +72,13 @@ delete = tk.Button(root, text="Delete Selected", command=delete_selected)
 delete.pack()
 
 #Bones of Table
-table = ttk.Treeview(root, columns=("Title", "Status", "Buttons"), show="headings" )
+style = ttk.Style() #FONT/format
+style.configure("Treeview", font=("Segoe UI", 12), rowheight=35)
+style.configure("Treeview.Heading", font=("Segoe UI", 16, "bold"))
+
+table = ttk.Treeview(root, columns=("Title", "Status",), show="headings" )
 table.heading("Title", text="Title")
 table.heading("Status", text="Status")
-table.heading("Buttons", text="Options")
 table.pack(fill="both", expand=True)
 
 update_table() #Populate the table on startup
